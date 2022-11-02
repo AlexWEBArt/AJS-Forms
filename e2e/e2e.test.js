@@ -3,7 +3,7 @@ import { fork } from 'child_process';
 
 jest.setTimeout(30000); // default puppeteer timeout
 
-describe('Credit Card Validator form', () => {
+describe('Batton tooltip', () => {
   let browser = null;
   let page = null;
   let server = null;
@@ -33,7 +33,7 @@ describe('Credit Card Validator form', () => {
     server.kill();
   });
 
-  test('Should valid card number', async () => {
+  test('a tooltip appears when you click', async () => {
     await page.goto(baseUrl);
 
     const btn = await page.$('.btn');
