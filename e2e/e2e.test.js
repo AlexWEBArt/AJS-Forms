@@ -36,26 +36,11 @@ describe('Credit Card Validator form', () => {
   test('Should valid card number', async () => {
     await page.goto(baseUrl);
 
-    const form = await page.$('.form-inline');
-    const input = await form.$('.form-control');
-    const submit = await form.$('.btn');
+    const btn = await page.$('.btn');
 
-    await input.type('371449635398431');
-    await submit.click();
+    await btn.click();
 
-    await page.waitForSelector('.form-inline .valid');
+    await page.waitForSelector('.container-btn-message');
   });
 
-  test('Should invalid card number', async () => {
-    await page.goto(baseUrl);
-
-    const form = await page.$('.form-inline');
-    const input = await form.$('.form-control');
-    const submit = await form.$('.btn');
-
-    await input.type('201449635398432');
-    await submit.click();
-
-    await page.waitForSelector('.form-inline .invalid');
-  });
 });

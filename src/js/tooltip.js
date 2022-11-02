@@ -1,36 +1,37 @@
 export default class Tooltip {
     constructor() {
-        this._tooltips = [];
+        this._tooltips = {};
     }
 
     showTooltip(message, element) {
         const tooltipElement = document.createElement('DIV');
+        const tooltipElementTitle = document.createElement('H1');
+        const tooltipElementText = document.createElement('DIV');
 
-        tooltipElement.classList.add('btn-message')
-        tooltipElement.textContent = message;
+        tooltipElement.classList.add('container-btn-message')
+        tooltipElementText.classList.add('btn-message')
+        tooltipElementTitle.textContent = 'Popover title';
+        tooltipElementText.textContent = message;
 
         const id = performance.now();
 
-        this._tooltips.push({
-            id,
-            element: tooltipElement
-        })
+        this._tooltips.id = id
+        this._tooltips.element = tooltipElement
 
         document.body.appendChild(tooltipElement);
+        tooltipElement.prepend(tooltipElementTitle);
+        tooltipElement.append(tooltipElementText);
 
         const { right, top } = element.getBoundingClientRect();
 
-        tooltipElement.style.left = right + 5 + 'px';
-        tooltipElement.style.top = top + element.offsetHeight / 2 - tooltipElement.offsetHeight / 2 + 'px';
+        tooltipElement.style.left = right - element.offsetWidth / 2 - tooltipElement.offsetWidth / 2 + 'px';
+        tooltipElement.style.top = element.offsetHeight * 1.5 + 'px';
 
         return id;
     }
 
     removeTooltip(id) {
-        const tooltip = this._tooltips.find(t => t.id === id);
-
+        const tooltip = this._tooltips;
         tooltip.element.remove();
-
-        this._tooltips = this._tooltips.filter(t => t.id !== id);
     }
 }
