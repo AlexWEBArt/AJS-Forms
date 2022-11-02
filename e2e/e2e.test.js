@@ -42,5 +42,4 @@ describe('Credit Card Validator form', () => {
 
     await page.waitForSelector('.container-btn-message');
   });
-
 });
